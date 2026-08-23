@@ -1,15 +1,20 @@
 /**
  * The two website routes, quoted separately from the core $6,500 — an
- * optional appendix, not a fifth phase. Durations and the commerce-platform
- * assumption are estimates flagged for confirmation before this goes out;
- * the two prices are the client's own numbers.
+ * optional appendix, not a fifth phase. Prices, durations and the platform
+ * are all confirmed: no hedging in front of a client, because "~2 weeks" and
+ * "a commerce platform" read as someone who has not decided yet.
+ *
+ * On payments: Shopify Payments does not operate in Lebanon, so card has to
+ * run through a local gateway the client onboards in their own name. Cash on
+ * delivery is the market norm and works from day one — which is why the
+ * checkout mockup shows it selected by default.
  */
 const ROUTES = [
   {
     name: "The brand site",
     tag: "Marketing",
     price: "$1,600",
-    weeks: "~2 weeks",
+    weeks: "2 weeks",
     blurb: "Tell the story, show the range, help someone find you on a shelf.",
     includes: [
       "Design mockups — home, the range, 1AM / 9AM, stockists, contact",
@@ -22,13 +27,13 @@ const ROUTES = [
     name: "The shop",
     tag: "Commercial",
     price: "$3,000",
-    weeks: "~3 weeks",
+    weeks: "3 weeks",
     blurb: "Sell the seven and the multipack, direct, across Lebanon.",
     includes: [
       "Design mockups — home, range, product page, cart, checkout",
-      "Built on a commerce platform, product catalogue loaded and priced",
-      "Lebanon delivery zones, card and cash on delivery, bilingual",
-      "Order emails, launch, a walkthrough of running it",
+      "Built on Shopify, the seven and the multipack loaded and priced",
+      "Lebanon delivery zones, cash on delivery from day one, bilingual",
+      "Card via a local gateway, order emails, launch, a walkthrough",
     ],
   },
 ];
@@ -38,7 +43,7 @@ const TERMS: Array<[string, string]> = [
   ["Revisions", "Two rounds on the mockups before a line of the build starts."],
   [
     "Not included",
-    "Domain, hosting and platform fees, payment-processor charges, product photography (covered by Chapter 04's shot list), and ongoing maintenance — available after launch at $300/day.",
+    "Domain, the Shopify subscription, and the merchant account with a local card gateway — all opened in your name. Product photography (covered by Chapter 04's shot list). Ongoing maintenance, available after launch at $300/day.",
   ],
   ["Timing", "Either route can start now, after week 6, or not at all — the $6,500 proposal stands on its own."],
 ];
