@@ -127,13 +127,13 @@ CONSTRAINTS: exactly seven sachets, no more and no fewer. No text of any kind an
  * separately and joined by sharp; the 9AM half is a reference-conditioned edit
  * of the 1AM select, so the hand and the sachet actually match.
  */
-const CAMPAIGN_1AM = `Documentary 16mm-grain photograph, portrait orientation. A hand raising a single dark burgundy-red electrolyte stick sachet over a crowded Beirut bar counter at night. Warm tungsten light, bottles and glassware blurred in the background, late-night energy, one small candle flame catching the counter.
+const CAMPAIGN_1AM = `Image 1 shows a product photograph of a single dark burgundy electrolyte stick sachet: vertical bone-white condensed capitals reading exactly "NOGRONI" cropped by the top crimp, and behind the type a LARGE spiral peel-curl icon drawn tone-on-tone in a darker cut of the same burgundy.
 
-The sachet is dark burgundy red, held upright, its face toward camera. Printed on it in vertical bone-white capitals, the only word in the frame, reading exactly "NOGRONI".
+Take that exact sachet — the same burgundy, the same vertical "NOGRONI" type at the same size and crop, the same large darker peel-curl icon, the same crimped serrated edges — and place it in a new photograph: held up in a hand over a crowded Beirut bar counter at night. Warm tungsten light, bottles and glassware blurred behind, late-night energy, one small candle flame on the counter. The sachet's printed face stays toward camera and keeps every element of its design from image 1 unchanged.
 
-Natural skin texture with visible pores and knuckle creases, real film grain, slight halation on the highlights, shallow depth of field, no studio gloss.
+Documentary 16mm-grain photograph, portrait orientation, natural skin texture with visible pores and knuckle creases, real film grain, slight halation on the highlights, shallow depth of field, no studio gloss.
 
-CONSTRAINTS: exactly one hand and exactly one sachet. The word "NOGRONI" appears ONCE and nowhere else — no second sachet, no reflection of it, no repeated text, no other words, no Arabic, no caption, no text overlay, no watermark, no logos, no faces in focus.`;
+CONSTRAINTS: exactly one hand and exactly one sachet — the sachet from image 1, redesigned in no way. The word "NOGRONI" appears ONCE, exactly as in image 1 — no second sachet, no repeated text, no other words, no Arabic, no caption, no watermark, no faces in focus.`;
 
 const CAMPAIGN_9AM = `Keep the hand and the sachet from image 1 exactly as they are — the same fingers, the same skin, the same dark burgundy sachet with the same vertical bone-white capitals reading exactly "NOGRONI", the same size and angle in frame.
 
@@ -375,12 +375,15 @@ export const SHOTS = [
     candidates: 2,
   },
   {
+    // Reference-conditioned on the APPROVED chapter-03 sachet, so the pack in
+    // the campaign is the pack in the packaging chapter — not a re-invention.
     id: "campaign-1am",
     dest: "04-launch/1am.webp",
     class: "half",
-    provider: "txt2img",
-    endpoint: T2I,
+    provider: "edit",
+    endpoint: EDIT,
     prompt: CAMPAIGN_1AM,
+    refs: ["public/images/03-packaging/gallery/07-nogroni.webp"],
     size: HALF,
     candidates: 3,
   },
