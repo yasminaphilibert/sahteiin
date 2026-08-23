@@ -4,7 +4,7 @@ slug: "MkGhwS6gCKM"
 title: "THE CLINK"
 kicker: "Chapter 02 · Identity"
 phase: "CHAPTER 02 · IDENTITY"
-released: false
+released: true
 color: "#F2C230"
 heroImage: "public/images/02-identity/hero.webp"
 heroAlt: "The clink mark in gloss varnish, catching the light on plum"
