@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Naskh+Arabic:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-plum text-bone font-body antialiased;
+    font-size: 17px;
+    line-height: 1.62;
+  }
+  ::selection {
+    background: #f4f0f7;
+    color: #15101a;
+  }
+  :focus-visible {
+    outline: 2px solid #f5b44c;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  /* The page frame every route sits in. */
+  .container-custom {
+    @apply mx-auto max-w-[1240px] px-5 md:px-8;
+  }
+
+  /* Small uppercase caption — the mono voice that carries all metadata. */
+  .label {
+    @apply block font-mono text-[12px] font-medium uppercase tracking-[0.22em] text-bone-3;
+  }
+
+  /* Bold uppercase display heading — the wordmark's own face. */
+  .display-heading {
+    @apply font-display font-extrabold uppercase tracking-[-0.02em] leading-[1.02] text-bone;
+  }
+
+  /* Body copy: generous leading, never below 85% bone. */
+  .body-copy {
+    @apply text-base leading-[1.7] text-bone-2;
+  }
+
+  .card-surface {
+    @apply rounded-[1.4rem] border border-white/10 bg-plum-2;
+  }
+
+  .media-frame {
+    @apply overflow-hidden rounded-[1.4rem];
+  }
+
+  .link-cta {
+    @apply inline-block font-mono text-[13px] font-medium uppercase tracking-[0.18em] text-bone-2 transition-colors duration-300 hover:text-bone;
+  }
+
+  /* Arabic set at equal weight — never smaller than the Latin beside it. */
+  .arabic {
+    @apply font-arabic;
+    direction: rtl;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

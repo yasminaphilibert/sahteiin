@@ -1,0 +1,65 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Create .nojekyll file
+        run: touch dist/.nojekyll
+
+      # Pages serves 404.html for any path that is not a real file, which is
+      # exactly every deep chapter link (/sahteiin/c/<slug>). Serving the app
+      # shell there lets the router take over — deep links survive a refresh.
+      - name: Copy index.html to 404.html for SPA routing
+        run: cp dist/index.html dist/404.html
+
+      - name: Verify build output
+        run: |
+          echo "=== Dist folder contents ==="
+          ls -la dist/
+          ls -la dist/.nojekyll
+          echo "=== Verifying referenced assets exist ==="
+          # Asset URLs carry the /sahteiin/ base; strip it to check files on disk.
+          ASSETS=$(grep -oE 'src="[^"]+"|href="[^"]+"' dist/index.html | grep -oE '/sahteiin/assets/[^"]+' | sed 's|^/sahteiin/||')
+          for asset in $ASSETS; do
+            if [ -f "dist/$asset" ]; then
+              echo "OK $asset"
+            else
+              echo "MISSING $asset"
+              exit 1
+            fi
+          done
+          echo "All referenced assets exist."
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          cname: false
+          keep_files: false
+          force_orphan: true
