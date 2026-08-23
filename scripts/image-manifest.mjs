@@ -419,22 +419,25 @@ CONSTRAINTS: exactly one poster. The only word anywhere in the frame is "SAHTEII
     arabic: true,
   },
   {
-    // POS — "one for the road". No text at all: the jar earns its place through
-    // the sachets and the lacquer, and asking for a label is asking for drift.
+    // POS — "one for the road". Reference-conditioned on the approved
+    // seven-sachet row, so the sticks in the jar are the sticks from the
+    // packaging chapter — same colours, same tone-on-tone icons — not plain
+    // re-inventions.
     id: "pos-jar",
     dest: "04-launch/pos.webp",
     class: "wide",
-    provider: "txt2img",
-    endpoint: T2I,
-    prompt: `Editorial photograph on a dark timber bar counter at night. A single short cylindrical jar of deep plum lacquer, glossy, catching one warm amber highlight down its side, filled with upright single-serve stick sachets standing on end so their crimped tops fan out above the rim.
+    provider: "edit",
+    endpoint: EDIT,
+    prompt: `Image 1 shows a product range: seven stick sachets standing in a row, each ONE flat matte colour — green, lime, yellow, coral, azure blue, deep violet, dark burgundy — and each printed with one LARGE flavour icon drawn tone-on-tone in a darker cut of its own colour.
 
-The sachets in the jar are in several flat matte colours — green, lime, yellow, coral, blue, violet, burgundy — clearly different from one another, no gradients, no printing visible on them at this angle beyond flat colour.
+Take those exact sachets — same colours, same icons, same crimped serrated edges, redesigned in no way — and photograph them standing upright in a short cylindrical jar of deep plum lacquer on a dark timber bar counter at night, their crimped tops fanning out above the rim, several of their printed faces angled toward camera so the icons read.
 
-Behind, thrown far out of focus: bottles on a back bar, one small warm lamp, a brass rail. Low-key spirits-advertising light, deep shadow falloff, soft reflection of the jar in the polished counter, fine film grain, 100mm macro feel, f/2.8.
+Behind, thrown far out of focus: bottles on a back bar, one small warm lamp, a brass rail. Low-key spirits-advertising light, one warm amber highlight down the jar's glossy side, deep shadow falloff, soft reflection in the polished counter, fine film grain, 100mm macro feel, f/2.8.
 
-CONSTRAINTS: exactly one jar. No text of any kind anywhere in the frame — no letters, no words, no numbers, no Arabic, no logos, no labels, no price cards, no menus. No people, no hands, no cocktail glasses, no ice, no fruit, no watermark, no neon, no lens flare.`,
+CONSTRAINTS: exactly one jar. The sachets are the sachets from image 1 — their colours and icons unchanged, the violet unmistakably violet, the burgundy unmistakably burgundy. No text of any kind anywhere in the frame — no letters, no words, no numbers, no Arabic, no logos, no labels, no price cards. No people, no hands, no cocktail glasses, no ice, no fruit, no watermark, no neon, no lens flare.`,
+    refs: ["public/images/03-packaging/hero.webp"],
     size: LANDSCAPE,
-    candidates: 3,
+    candidates: 5,
   },
   {
     // Say it before. Say it after. Joined by sharp so each half only ever had

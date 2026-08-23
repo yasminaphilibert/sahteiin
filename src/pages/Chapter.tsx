@@ -41,11 +41,15 @@ const Chapter = () => {
 
   return (
     <div className="pb-16">
-      {/* Hero */}
+      {/* Hero.
+          The box takes the image's aspect (all heroes are encoded 2280x1536,
+          3:2) instead of a fixed viewport height with object-cover — the crop
+          was cutting the carton's mark off the top and the sachets' crimps off
+          the bottom. Every hero was composed edge to edge; show all of it. */}
       {chapter.heroImage && (
         <div className="container-custom pt-6">
           <motion.div
-            className="media-frame h-[46vh] bg-plum-2 md:h-[64vh]"
+            className="media-frame bg-plum-2"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
@@ -53,7 +57,9 @@ const Chapter = () => {
             <img
               src={chapter.heroImage}
               alt={chapter.heroAlt ?? chapter.title}
-              className="h-full w-full object-cover"
+              width={2280}
+              height={1536}
+              className="block h-auto w-full"
             />
           </motion.div>
         </div>
