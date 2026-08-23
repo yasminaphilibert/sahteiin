@@ -11,18 +11,20 @@ import SignOff from "@/components/SignOff";
 import ClinkMark from "@/components/ClinkMark";
 
 /**
- * Reveals on mount, deliberately NOT on scroll.
+ * Scroll reveal, with the threshold kept deliberately low.
  *
- * A `whileInView` reveal starts the section at opacity 0 and waits for an
- * IntersectionObserver to undo it. That is a reveal that can fail closed: this
- * gallery's images carry no intrinsic size, so the section had almost no area,
- * the observer never fired, and the whole block stayed invisible on the live
- * site. A proposal page is the last place to accept "usually visible" — the
- * animation is a flourish, so it is not allowed to own whether content renders.
+ * `whileInView` starts a section at opacity 0 and waits for an
+ * IntersectionObserver to undo it, so anything that stops the observer firing
+ * leaves the content invisible. The default "some" threshold is the risky part:
+ * a section with little or no laid-out area may never satisfy it. `amount:
+ * 0.01` fires on the first sliver of intersection instead, and the gallery no
+ * longer collapses to zero height now that its images load, so the case that
+ * made this fragile is gone on both sides.
  */
 const rise = {
   initial: { opacity: 0, y: 14 },
-  animate: { opacity: 1, y: 0 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.01 },
   transition: { duration: 0.6, ease: [0.2, 0.7, 0.3, 1] as const },
 };
 
