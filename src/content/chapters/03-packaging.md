@@ -4,7 +4,7 @@ slug: "lX1he8R7OaA"
 title: "SEVEN ACROSS THE ROOM"
 kicker: "Chapter 03 · Packaging"
 phase: "CHAPTER 03 · PACKAGING"
-released: false
+released: true
 color: "#2E9BD6"
 heroImage: "public/images/03-packaging/hero.webp"
 heroAlt: "Seven sachets in a row, overhead, on plum-black"

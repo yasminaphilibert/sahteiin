@@ -4,7 +4,7 @@ slug: "HPt001Ax8sY"
 title: "1AM / 9AM"
 kicker: "Chapter 04 · Launch kit"
 phase: "CHAPTER 04 · LAUNCH KIT"
-released: false
+released: true
 color: "#B01E3C"
 heroImage: "public/images/04-launch/hero.webp"
 heroAlt: "The same hand and the same sachet, twelve hours apart"
