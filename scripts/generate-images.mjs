@@ -206,6 +206,34 @@ ${rows.join("\n")}`;
   console.log(`contact sheet: generated/index.html (${rows.length} shots)`);
 }
 
+/**
+ * Composite صحتين onto a render as REAL type.
+ *
+ * Every model that was asked for the Arabic returned a different wrong word —
+ * با فل, قمرن, خيين. So no model is asked any more: the packs are generated
+ * with their upper face deliberately empty, and the toast is set here in a
+ * system Arabic face, correctly shaped and joined, at a position chosen by eye
+ * per candidate. Percentages, not pixels, so the placement survives the later
+ * resize to the class grid.
+ *
+ *   --arabic <shot-id> <candidate-n> <xPct> <yPct> <sizePct>
+ */
+async function overlayArabic(buf, xPct, yPct, sizePct) {
+  const { width, height } = await sharp(buf).metadata();
+  const fontSize = Math.round((sizePct / 100) * height);
+  const x = Math.round((xPct / 100) * width);
+  const y = Math.round((yPct / 100) * height);
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">
+  <text x="${x}" y="${y}" font-family="Segoe UI, Noto Naskh Arabic, Arial"
+        font-size="${fontSize}" fill="#F4F0F7" fill-opacity="0.94"
+        text-anchor="middle" direction="rtl">صحتين</text>
+</svg>`;
+  return sharp(buf)
+    .composite([{ input: Buffer.from(svg), blend: "over" }])
+    .png()
+    .toBuffer();
+}
+
 async function upscale(buf) {
   const url = await uploadToFal(buf, "image/png", "select.png");
   const [out] = await runQueue("fal-ai/clarity-upscaler", { image_url: url, upscale_factor: 2 });
@@ -213,7 +241,7 @@ async function upscale(buf) {
   return Buffer.from(await res.arrayBuffer());
 }
 
-async function select(id, n, doUpscale) {
+async function select(id, n, doUpscale, arabic) {
   const shot = SHOTS.find((s) => s.id === id);
   if (!shot) throw new Error(`unknown shot id: ${id}`);
 
@@ -227,6 +255,15 @@ async function select(id, n, doUpscale) {
       process.stdout.write(`[${id}] clarity upscale … `);
       buf = await upscale(buf);
       console.log("done");
+    }
+    if (arabic) {
+      buf = await overlayArabic(buf, arabic.x, arabic.y, arabic.size);
+      console.log(`[${id}] صحتين composited at ${arabic.x}% / ${arabic.y}%`);
+    } else if (shot.arabic) {
+      console.log(
+        `[${id}] note: this shot reserves space for صحتين — add it with ` +
+          `--arabic ${id} ${n} <xPct> <yPct> <sizePct>`
+      );
     }
   }
 
@@ -251,6 +288,17 @@ async function main() {
     const [, id, n, flag] = argv;
     if (!id) throw new Error("usage: --select <shot-id> <candidate-n> [--upscale]");
     return select(id, n, flag === "--upscale");
+  }
+  if (argv[0] === "--arabic") {
+    const [, id, n, x, y, size, flag] = argv;
+    if (!id || x === undefined || y === undefined) {
+      throw new Error("usage: --arabic <shot-id> <candidate-n> <xPct> <yPct> <sizePct> [--upscale]");
+    }
+    return select(id, n, flag === "--upscale", {
+      x: Number(x),
+      y: Number(y),
+      size: Number(size ?? 12),
+    });
   }
 
   const ids = argv.filter((a) => !a.startsWith("--"));
