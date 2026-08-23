@@ -35,7 +35,9 @@ const CARTON = `A single closed rectangular carton, alone, centered, three-quart
 
 Editorial product photograph on a seamless deep plum-black backdrop (#15101A) — cool plum-black, NOT maroon, NOT brown. High-end spirits advertising: dramatic, textured, close.
 
-The carton is matte soft-touch deep plum, every edge and panel the same plum — no gold, no tan, no metallic edge, no open flap. Its front face is a designed composition, NOT centered text:
+The carton is matte soft-touch deep plum on EVERY surface. The front face is deep plum. The side panel turning away from camera is the SAME deep plum, printed edge to edge, only darker because it falls into shadow. The top edge is the same deep plum. The board is printed plum on all faces and the flaps are closed, so every visible surface of this box is one continuous plum — the box is plum the whole way round, like a solid block of plum board.
+
+Its front face is a designed composition, NOT centered text:
 — top left: the brand mark alone — two thin bone-white strokes leaning together like two glasses caught mid-clink, with a tiny four-point spark above where they meet — printed in gloss varnish so it catches the light
 — the upper half of the face is left EMPTY: clean unbroken matte plum board, no text, no graphics, no ornament, deliberately reserved negative space
 — lower third: the wordmark reading exactly "SAHTEIIN" in capitals, wide geometric sans, tightly letter-spaced, oversized so it spans nearly the full face width
@@ -47,7 +49,7 @@ LIGHT: low-key spirits-ad lighting — one large soft key from the upper left, o
 
 CAMERA: 100mm macro feel, f/4, slightly below eye level so the carton looms, visible paper tooth and the varnish sheen on the mark.
 
-CONSTRAINTS: exactly one carton, alone in frame. No sachets or sticks of any kind. No Arabic script, no Arabic text, no second alphabet — Latin capitals only. Render "SAHTEIIN" and "ELECTROLYTE STICKS · 14 SACHETS" exactly as written with correct spelling; no other words anywhere. No rainbow stripes, no neon, no glow, no gradients, no confetti, no squiggles, no liquid splashes, no cocktail glasses, no ice, no fruit props, no people, no hands, no watermark, no registered-trademark symbol, no extra logos, no lens flare.`;
+CONSTRAINTS: exactly one carton, alone in frame, plum on every visible face including the side panel. Uncoated matte plum board throughout — the side panel is plum, the same plum as the front. No sachets or sticks of any kind. No Arabic script, no Arabic text, no second alphabet — Latin capitals only. Render "SAHTEIIN" and "ELECTROLYTE STICKS · 14 SACHETS" exactly as written with correct spelling; no other words anywhere. No rainbow stripes, no neon, no glow, no gradients, no confetti, no squiggles, no liquid splashes, no cocktail glasses, no ice, no fruit props, no people, no hands, no watermark, no registered-trademark symbol, no extra logos, no lens flare, no kraft, no brown cardboard, no gold, no tan, no metallic edge.`;
 
 const SACHETS_ROW = `SEVEN sachets. Exactly seven — count them: one, two, three, four, five, six, seven. Not six, not eight, not nine. Seven single-serve stick sachets standing upright in one slightly staggered row, evenly spaced, no box and no other object in the frame.
 
@@ -91,7 +93,28 @@ Crisp crimped serrated edges, subtle foil sheen on the seal only, visible paper 
 
 CONSTRAINTS: exactly seven sachets, no more and no fewer. No text of any kind anywhere in the frame — no letters, no words, no numbers, no Arabic, no logos. Icons only. No props, no box, no rainbow stripes, no neon, no glow, no gradients, no confetti, no squiggles, no splashes, no glasses, no ice, no fruit, no people, no hands, no watermark.`;
 
-const VARIANT_B = `Documentary 16mm-grain photograph, split composition, one frame divided vertically into two halves. LEFT HALF: a hand raising a dark burgundy-red SAHTEIIN electrolyte stick sachet reading exactly "NOGRONI" in vertical bone-white capitals over a crowded Beirut bar counter at night — warm tungsten light, bottles and motion blurred in the background, 1AM energy. RIGHT HALF: the same hand holding the same burgundy sachet on a sunlit kitchen counter the next morning — cool soft daylight, quiet, 9AM. Natural skin texture, real film grain, slight halation, no studio gloss, no text overlay, no watermark, no other people's faces in focus.`;
+/**
+ * The 1AM/9AM frame was one image containing the word NOGRONI twice — and one
+ * of the two always garbled ("ZOGROZN", "NOGRON"). Same lesson as the hero:
+ * one subject, one instance of the text, per render. The two halves are shot
+ * separately and joined by sharp; the 9AM half is a reference-conditioned edit
+ * of the 1AM select, so the hand and the sachet actually match.
+ */
+const CAMPAIGN_1AM = `Documentary 16mm-grain photograph, portrait orientation. A hand raising a single dark burgundy-red electrolyte stick sachet over a crowded Beirut bar counter at night. Warm tungsten light, bottles and glassware blurred in the background, late-night energy, one small candle flame catching the counter.
+
+The sachet is dark burgundy red, held upright, its face toward camera. Printed on it in vertical bone-white capitals, the only word in the frame, reading exactly "NOGRONI".
+
+Natural skin texture with visible pores and knuckle creases, real film grain, slight halation on the highlights, shallow depth of field, no studio gloss.
+
+CONSTRAINTS: exactly one hand and exactly one sachet. The word "NOGRONI" appears ONCE and nowhere else — no second sachet, no reflection of it, no repeated text, no other words, no Arabic, no caption, no text overlay, no watermark, no logos, no faces in focus.`;
+
+const CAMPAIGN_9AM = `Keep the hand and the sachet from image 1 exactly as they are — the same fingers, the same skin, the same dark burgundy sachet with the same vertical bone-white capitals reading exactly "NOGRONI", the same size and angle in frame.
+
+Change only the world around them: it is now nine in the morning. The hand rests on a sunlit kitchen counter, cool soft daylight through a window, a plain ceramic mug and a glass of water out of focus behind, quiet and still.
+
+Documentary 16mm-grain photograph, portrait orientation, natural skin texture, real film grain, shallow depth of field, no studio gloss.
+
+CONSTRAINTS: exactly one hand and exactly one sachet. The word "NOGRONI" appears ONCE, spelled exactly that way — no second sachet, no repeated text, no other words, no Arabic, no caption, no text overlay, no watermark, no faces.`;
 
 const BEFORE = `Amateur product mockup of an energy-drink style electrolyte brand called ELECTRONYTES, rendered the way a generic AI concept looks: a navy blue background with neon squiggle graphics and glowing accents, six stick sachets (not seven) sharing one warm orange-to-pink gradient so they all look alike, a centered glossy wordmark floating in empty space, small wobbly white icons, plastic-looking surfaces, oversaturated, generic sports-supplement energy. Clean spelling of "ELECTRONYTES" only — no other readable text. Flat even lighting, e-commerce render feel, slight CGI sheen.`;
 
@@ -135,6 +158,7 @@ export const OUT_SIZES = {
   compare: { w: 1520, h: 1024 },
   wide: { w: 2280, h: 1536 },
   gallery: { w: 1024, h: 1520 },
+  half: { w: 1140, h: 1536 },
 };
 
 const T2I = "fal-ai/flux-2-pro"; // text-heavy pack shots — FLUX-class fidelity
@@ -143,6 +167,7 @@ const T2I_ALT = "fal-ai/qwen-image"; // the second voice for "resolved twice"
 
 const LANDSCAPE = { width: 1536, height: 1024 };
 const PORTRAIT = { width: 1024, height: 1536 };
+const HALF = { width: 768, height: 1024 };
 
 export const SHOTS = [
   {
@@ -321,13 +346,33 @@ export const SHOTS = [
     candidates: 2,
   },
   {
+    id: "campaign-1am",
+    dest: "04-launch/1am.webp",
+    class: "half",
+    provider: "txt2img",
+    endpoint: T2I,
+    prompt: CAMPAIGN_1AM,
+    size: HALF,
+    candidates: 3,
+  },
+  {
+    id: "campaign-9am",
+    dest: "04-launch/9am.webp",
+    class: "half",
+    provider: "edit",
+    endpoint: EDIT,
+    prompt: CAMPAIGN_9AM,
+    refs: ["public/images/04-launch/1am.webp"],
+    size: HALF,
+    candidates: 3,
+  },
+  {
+    // Say it before. Say it after. Joined by sharp so each half only ever had
+    // to render the word once.
     id: "campaign",
     dest: "04-launch/hero.webp",
     class: "wide",
-    provider: "txt2img",
-    endpoint: T2I,
-    prompt: VARIANT_B,
-    size: LANDSCAPE,
-    candidates: 4,
+    provider: "join",
+    from: ["campaign-1am", "campaign-9am"],
   },
 ];

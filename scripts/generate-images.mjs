@@ -143,8 +143,41 @@ async function existingCandidates(id) {
   }
 }
 
+/** Join two selected halves into one split frame, with a hairline gutter. */
+async function joinHalves(shot) {
+  const parts = [];
+  for (const id of shot.from) {
+    const src = SHOTS.find((s) => s.id === id);
+    parts.push(await readFile(path.join(PUB, src.dest)));
+  }
+  const metas = await Promise.all(parts.map((b) => sharp(b).metadata()));
+  const h = Math.min(...metas.map((m) => m.height));
+  const resized = await Promise.all(
+    parts.map((b) => sharp(b).resize({ height: h }).png().toBuffer())
+  );
+  const widths = await Promise.all(
+    resized.map(async (b) => (await sharp(b).metadata()).width)
+  );
+  const gutter = 8;
+  const totalW = widths.reduce((a, b) => a + b, 0) + gutter;
+  return sharp({
+    create: {
+      width: totalW,
+      height: h,
+      channels: 3,
+      background: "#15101A",
+    },
+  })
+    .composite([
+      { input: resized[0], left: 0, top: 0 },
+      { input: resized[1], left: widths[0] + gutter, top: 0 },
+    ])
+    .png()
+    .toBuffer();
+}
+
 async function generateShot(shot) {
-  if (shot.provider === "reuse") return; // resolved at --select time
+  if (shot.provider === "reuse" || shot.provider === "join") return; // resolved at --select time
   const dir = path.join(GEN, shot.id);
   await mkdir(dir, { recursive: true });
   const have = await existingCandidates(shot.id);
@@ -249,6 +282,8 @@ async function select(id, n, doUpscale, arabic) {
   if (shot.provider === "reuse") {
     const src = SHOTS.find((s) => s.id === shot.from);
     buf = await readFile(path.join(PUB, src.dest));
+  } else if (shot.provider === "join") {
+    buf = await joinHalves(shot);
   } else {
     buf = await readFile(path.join(GEN, id, `cand-${n}.png`));
     if (doUpscale) {
