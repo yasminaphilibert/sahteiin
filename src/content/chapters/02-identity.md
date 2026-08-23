@@ -15,10 +15,17 @@ tags:
   - logo
   - bilingual type
   - colour system
+tools:
+  - drawn vectors
+  - 24-unit grid
 keywords:
   - the clink
   - gloss varnish
   - bar not pharmacy
+galleryImages:
+  - "public/images/02-identity/grid.webp"
+  - "public/images/02-identity/icons.webp"
+  - "public/images/02-identity/palette.webp"
 weeks: "Weeks 1.5 – 3"
 fee: "$1,900"
 closesWith:

@@ -26,6 +26,7 @@ tools:
   - Qwen-Image-2
   - Clarity Upscaler
   - sharp
+note: "Every image in this proposal is a concept visual, made to show the direction — not production artwork. Logos, dielines and print files are deliverables of the phases described here."
 weeks: "6 weeks · 4 chapters"
 fee: "$6,500 flat · EN/AR"
 comparisonPairs:

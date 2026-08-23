@@ -55,6 +55,14 @@ const MetaBlock = ({ chapter }: { chapter: ChapterContent }) => {
             <Pills items={chapter.tools} />
           </div>
         )}
+        {/* Stated as metadata rather than buried in the prose: the renders are
+            persuasive enough to be mistaken for finished design, and the scope
+            conversation that follows is better had now than at the printer. */}
+        {chapter.note && (
+          <div className="border-t border-white/10 pt-4">
+            <p className="text-[13px] leading-relaxed text-bone-3">{chapter.note}</p>
+          </div>
+        )}
       </div>
     </div>
   );

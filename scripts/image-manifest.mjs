@@ -396,6 +396,44 @@ export const SHOTS = [
     candidates: 3,
   },
   {
+    // OOH — "the wall". One word on the poster, because a poster carrying both
+    // the wordmark and the toast is two pieces of text in one frame, and that
+    // is exactly the shape that garbles. The Arabic goes on afterwards.
+    id: "ooh-wall",
+    dest: "04-launch/ooh.webp",
+    class: "wide",
+    provider: "txt2img",
+    endpoint: T2I,
+    prompt: `Documentary street photograph, late afternoon, Beirut. A single large pasted paper poster on a weathered plaster wall — pocked concrete, old paste marks, a rusted downpipe to one side, a scooter parked out of focus in the foreground.
+
+The poster is matte deep plum (#15101A) — cool plum-black, NOT maroon, NOT brown. Its composition: the upper two-thirds is EMPTY plum paper, clean and unbroken, deliberately reserved negative space. Low on the poster, one wide geometric sans wordmark reading exactly "SAHTEIIN" in bone-white capitals, oversized, spanning nearly the full width. At the very base, a small index of seven short stacked horizontal lines in seven different colours — green, lime, yellow, coral, blue, violet, burgundy.
+
+Slightly warm low sun raking across the wall, real paper texture with a few bubbles and a lifted corner, fine film grain, natural colour, no studio gloss.
+
+CONSTRAINTS: exactly one poster. The only word anywhere in the frame is "SAHTEIIN", spelled exactly that way — no Arabic script, no second alphabet, no slogan, no street signage, no shop signs, no graffiti text, no watermark. No people's faces in focus. No neon, no glow, no lens flare.`,
+    size: LANDSCAPE,
+    candidates: 3,
+    arabic: true,
+  },
+  {
+    // POS — "one for the road". No text at all: the jar earns its place through
+    // the sachets and the lacquer, and asking for a label is asking for drift.
+    id: "pos-jar",
+    dest: "04-launch/pos.webp",
+    class: "wide",
+    provider: "txt2img",
+    endpoint: T2I,
+    prompt: `Editorial photograph on a dark timber bar counter at night. A single short cylindrical jar of deep plum lacquer, glossy, catching one warm amber highlight down its side, filled with upright single-serve stick sachets standing on end so their crimped tops fan out above the rim.
+
+The sachets in the jar are in several flat matte colours — green, lime, yellow, coral, blue, violet, burgundy — clearly different from one another, no gradients, no printing visible on them at this angle beyond flat colour.
+
+Behind, thrown far out of focus: bottles on a back bar, one small warm lamp, a brass rail. Low-key spirits-advertising light, deep shadow falloff, soft reflection of the jar in the polished counter, fine film grain, 100mm macro feel, f/2.8.
+
+CONSTRAINTS: exactly one jar. No text of any kind anywhere in the frame — no letters, no words, no numbers, no Arabic, no logos, no labels, no price cards, no menus. No people, no hands, no cocktail glasses, no ice, no fruit, no watermark, no neon, no lens flare.`,
+    size: LANDSCAPE,
+    candidates: 3,
+  },
+  {
     // Say it before. Say it after. Joined by sharp so each half only ever had
     // to render the word once.
     id: "campaign",

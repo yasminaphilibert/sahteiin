@@ -1,0 +1,30 @@
+[
+ {
+  "name": "elderflower",
+  "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 21v-8\"/><path d=\"M12 13 6.8 7.6\"/><path d=\"M12 13v-7\"/><path d=\"M12 13 17.2 7.6\"/><circle cx=\"6\" cy=\"6.4\" r=\"1.5\"/><circle cx=\"12\" cy=\"4.4\" r=\"1.5\"/><circle cx=\"18\" cy=\"6.4\" r=\"1.5\"/><circle cx=\"8.6\" cy=\"10.2\" r=\"0.9\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"15.4\" cy=\"10.2\" r=\"0.9\" fill=\"currentColor\" stroke=\"none\"/></svg>"
+ },
+ {
+  "name": "salted rim",
+  "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4.5 7.5c0 4.4 3.3 7.2 7.5 7.2s7.5-2.8 7.5-7.2\"/><path d=\"M12 14.7v4.3\"/><path d=\"M8.5 20.5h7\"/><circle cx=\"4.2\" cy=\"5.4\" r=\"0.95\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"8.2\" cy=\"3.9\" r=\"0.95\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"12\" cy=\"3.4\" r=\"0.95\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"15.8\" cy=\"3.9\" r=\"0.95\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"19.8\" cy=\"5.4\" r=\"0.95\" fill=\"currentColor\" stroke=\"none\"/></svg>"
+ },
+ {
+  "name": "lemon",
+  "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4.6 13.4c-1.1-.9-1.1-2 0-2.9C6.3 8 9 6.9 12 6.9s5.7 1.1 7.4 3.6c1.1.9 1.1 2 0 2.9-1.7 2.5-4.4 3.6-7.4 3.6s-5.7-1.1-7.4-3.6Z\"/><path d=\"M12 6.7c.3-2 1.7-3.2 3.8-3.2-.3 2-1.7 3.2-3.8 3.2Z\"/></svg>"
+ },
+ {
+  "name": "grapefruit",
+  "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3.5 9.5h17a8.5 8.5 0 0 1-17 0Z\"/><path d=\"M5.8 9.5a6.2 6.2 0 0 0 12.4 0\"/><path d=\"M12 9.5v6.1\"/><path d=\"M12 9.5l-4.3 4.3\"/><path d=\"M12 9.5l4.3 4.3\"/></svg>"
+ },
+ {
+  "name": "pineapple",
+  "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 7.5c-2.9 0-4.6 2.2-4.6 5.6S9.1 20.5 12 20.5s4.6-4 4.6-7.4S14.9 7.5 12 7.5Z\"/><path d=\"M12 7.3 9.2 3.6\"/><path d=\"M12 7.3V3\"/><path d=\"M12 7.3l2.8-3.7\"/><path d=\"M8.2 10.6l7.6 7.6\"/><path d=\"M8 14.6l5.5 5.5\"/><path d=\"M15.8 10.6l-7.6 7.6\"/><path d=\"M16 14.6l-5.5 5.5\"/></svg>"
+ },
+ {
+  "name": "blackberry",
+  "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"9.4\" cy=\"11.2\" r=\"2.1\"/><circle cx=\"14.6\" cy=\"11.2\" r=\"2.1\"/><circle cx=\"7\" cy=\"15\" r=\"2.1\"/><circle cx=\"12\" cy=\"15\" r=\"2.1\"/><circle cx=\"17\" cy=\"15\" r=\"2.1\"/><circle cx=\"9.4\" cy=\"18.8\" r=\"2.1\"/><circle cx=\"14.6\" cy=\"18.8\" r=\"2.1\"/><path d=\"M12 8.6c0-2.2 1.4-3.6 3.4-3.6-.2 2.2-1.5 3.6-3.4 3.6Z\"/></svg>"
+ },
+ {
+  "name": "peel twist",
+  "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12.6 12.2a1.6 1.6 0 1 0-3.2 0 3.4 3.4 0 0 0 6.8 0 5.2 5.2 0 0 0-10.4 0 7 7 0 0 0 12.3 4.6\"/><path d=\"M18.1 16.8l2.4-.3-.9 2.2\"/></svg>"
+ }
+]

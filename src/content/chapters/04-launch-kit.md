@@ -18,6 +18,11 @@ keywords:
   - twelve hours apart
   - 16mm grain
   - say it before say it after
+galleryImages:
+  - "public/images/04-launch/1am.webp"
+  - "public/images/04-launch/9am.webp"
+  - "public/images/04-launch/ooh.webp"
+  - "public/images/04-launch/pos.webp"
 weeks: "Weeks 5 – 6"
 fee: "$1,100"
 closesWith:

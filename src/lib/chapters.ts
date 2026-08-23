@@ -44,6 +44,8 @@ export interface ChapterContent {
   tags?: string[];
   keywords?: string[];
   tools?: string[];
+  /** A short caveat rendered under the metadata, e.g. that imagery is concept work. */
+  note?: string;
   galleryImages?: string[];
   comparisonPairs?: ComparisonPair[];
   /** Caption line above the comparison set. */
@@ -67,10 +69,18 @@ function cleanValue(raw: string): string | number | boolean {
   return v;
 }
 
-function parseFrontmatter(content: string): {
+function parseFrontmatter(raw: string): {
   data: Record<string, unknown>;
   content: string;
 } {
+  // Normalise line endings before anything else. `\r` is a line terminator to
+  // JS regex, so on a CRLF checkout `(.*)$` stops short of it and every
+  // top-level scalar — slug, title, order — parses as null while indented
+  // array items still come through (they get .trim()ed). The symptom is a
+  // chapter that silently 404s with its gallery intact. Git on Windows
+  // converts to CRLF by default, so this is the state of a fresh clone here,
+  // not an exotic edge case.
+  const content = raw.replace(/\r\n?/g, "\n");
   const match = content.match(/^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/);
   if (!match) return { data: {}, content: content.trim() };
 
@@ -222,6 +232,7 @@ export function loadChapters(): ChapterContent[] {
       tags: (data.tags as string[]) ?? [],
       keywords: (data.keywords as string[]) ?? [],
       tools: (data.tools as string[]) ?? [],
+      note: data.note as string | undefined,
       galleryImages: ((data.galleryImages as string[]) ?? []).map(withBase),
       comparisonPairs: ((data.comparisonPairs as ComparisonPair[]) ?? []).map(
         normalizePair
