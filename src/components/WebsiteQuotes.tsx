@@ -8,7 +8,7 @@ const ROUTES = [
   {
     name: "The brand site",
     tag: "Marketing",
-    price: "$800",
+    price: "$1,600",
     weeks: "~2 weeks",
     blurb: "Tell the story, show the range, help someone find you on a shelf.",
     includes: [
@@ -21,7 +21,7 @@ const ROUTES = [
   {
     name: "The shop",
     tag: "Commercial",
-    price: "$1,500",
+    price: "$3,000",
     weeks: "~3 weeks",
     blurb: "Sell the seven and the multipack, direct, across Lebanon.",
     includes: [
