@@ -5,6 +5,7 @@ import CompareSlider from "@/components/CompareSlider";
 import MetaBlock from "@/components/MetaBlock";
 import RoadmapTimeline from "@/components/RoadmapTimeline";
 import PricingTable from "@/components/PricingTable";
+import WebsiteQuotes from "@/components/WebsiteQuotes";
 import ChapterFooterNav from "@/components/ChapterFooterNav";
 import SpectrumStrip from "@/components/SpectrumStrip";
 import SignOff from "@/components/SignOff";
@@ -168,6 +169,12 @@ const Chapter = () => {
       {chapter.showPricing && (
         <motion.section className="container-custom py-10 md:py-14" {...rise}>
           <PricingTable />
+        </motion.section>
+      )}
+
+      {chapter.showWebsiteQuotes && (
+        <motion.section className="container-custom py-10 md:py-14" {...rise}>
+          <WebsiteQuotes />
         </motion.section>
       )}
 

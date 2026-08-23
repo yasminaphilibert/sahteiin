@@ -12,7 +12,7 @@ const INCLUDED = [
 const TERMS: Array<[string, string]> = [
   [
     "Not in this price",
-    "Trademark filing & MoPH registration, printing costs, photography production, website — happy to quote any of these later.",
+    "Trademark filing & MoPH registration, printing costs, photography production. The website is quoted separately — see the next chapter.",
   ],
   [
     "Printing",

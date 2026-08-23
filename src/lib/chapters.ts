@@ -53,6 +53,8 @@ export interface ChapterContent {
   compareNote?: string;
   showTimeline?: boolean;
   showPricing?: boolean;
+  /** Chapter 06: the two website quote cards. */
+  showWebsiteQuotes?: boolean;
   /** Colophon: fee, week range and what the phase closes with. */
   fee?: string;
   weeks?: string;
@@ -241,6 +243,7 @@ export function loadChapters(): ChapterContent[] {
       compareNote: data.compareNote as string | undefined,
       showTimeline: data.showTimeline === true,
       showPricing: data.showPricing === true,
+      showWebsiteQuotes: data.showWebsiteQuotes === true,
       fee: data.fee as string | undefined,
       weeks: data.weeks as string | undefined,
       closesWith: (data.closesWith as string[]) ?? [],
