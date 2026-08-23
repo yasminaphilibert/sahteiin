@@ -19,6 +19,7 @@ keywords:
   - colour wheel
   - arm's length test
 galleryImages:
+  - "public/images/03-packaging/flatlay.webp"
   - "public/images/03-packaging/gallery/01-hugo-again.webp"
   - "public/images/03-packaging/gallery/02-salty-rita.webp"
   - "public/images/03-packaging/gallery/03-limon-chill.webp"

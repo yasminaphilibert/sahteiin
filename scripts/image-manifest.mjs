@@ -73,6 +73,33 @@ LIGHT: one large soft key from the upper left, one hard warm amber rim light fro
 
 CONSTRAINTS: exactly seven sachets, no more and no fewer. No text of any kind on the sachets or anywhere in the frame — no letters, no words, no numbers, no Arabic, no logos. Icons only. No carton, no box. No rainbow stripes, no neon, no glow, no confetti, no squiggles, no liquid splashes, no cocktail glasses, no ice, no fruit props, no people, no hands, no watermark, no lens flare.`;
 
+/**
+ * The flat-lay was the one shot that would not count. Four text-to-image
+ * candidates returned six sachets every time, even with the count leading the
+ * prompt — an evenly spaced overhead row seems to have its own idea of how many
+ * things belong in it. So the count stops being something the text argues for
+ * and becomes something the REFERENCE already contains: image 1 is the approved
+ * seven-sachet row, and the job is only to re-photograph it from above.
+ * Reference-conditioned counting is what made the seven portraits work.
+ */
+const VARIANT_A_EDIT = `Image 1 shows a complete product range: a row of stick sachets standing upright. Re-photograph that exact same set of sachets from directly overhead, lying flat on the surface.
+
+Keep every sachet from image 1 — do not drop any, do not add any. Each keeps its own colour and its own icon exactly as it appears in image 1: the green one stays green with its elderflower sprig, the lime one its salted coupe rim, the yellow its lemon, the coral its grapefruit wedge, the blue its pineapple, the violet its blackberry, the burgundy its peel twist. Same flat matte colours, same tone-on-tone icons in a darker cut of each sachet's own colour, same crimped serrated edges.
+
+Change only the camera and the pose: a true top-down overhead flat-lay, the sachets lying flat in one even row on a deep plum-black surface (#15101A), evenly spaced with a small consistent gap, all parallel, all the same way up.
+
+Soft even top light, one subtle soft shadow per sachet, visible paper texture, fine film grain.
+
+CONSTRAINTS: the same number of sachets as image 1 — every one of them, none missing, none duplicated. No text of any kind anywhere in the frame: no letters, no words, no numbers, no Arabic, no logos. Icons only. No carton, no box, no props, no hands, no watermark.`;
+
+/**
+ * Kept for the record, not in the shot list. Two text-to-image attempts at the
+ * flat-lay both lost: a single even row returned six sachets four times running,
+ * and a 4-over-3 two-row arrangement drifted worse still — six sachets, every
+ * SKU collapsed to warm, fruit props that were explicitly excluded, and the same
+ * cocktail-glass icon repeated. The reference-conditioned edit above is what
+ * works. When a count matters, give the model the count as a picture.
+ */
 const VARIANT_A = `SEVEN sachets. Exactly seven — count them: one, two, three, four, five, six, seven. Not six, not eight. Overhead flat-lay, the seven laid in one perfectly even row, evenly spaced, nothing else in the frame.
 
 Editorial product photograph on a deep plum-black surface (#15101A) — cool plum-black, NOT maroon, NOT brown.
@@ -234,14 +261,16 @@ export const SHOTS = [
     candidates: 3,
   },
   {
+    // Reference-conditioned: the approved seven-sachet row carries the count.
     id: "flatlay",
     dest: "03-packaging/flatlay.webp",
     class: "wide",
-    provider: "txt2img",
-    endpoint: T2I,
-    prompt: VARIANT_A,
+    provider: "edit",
+    endpoint: EDIT,
+    prompt: VARIANT_A_EDIT,
+    refs: ["public/images/03-packaging/hero.webp"],
     size: LANDSCAPE,
-    candidates: 4,
+    candidates: 3,
   },
   // Seven sachet portraits — reference-conditioned on the hero select so the
   // set shares one lighting world. Refs are addressed positionally ("image 1").
