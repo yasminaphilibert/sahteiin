@@ -10,10 +10,19 @@ import SpectrumStrip from "@/components/SpectrumStrip";
 import SignOff from "@/components/SignOff";
 import ClinkMark from "@/components/ClinkMark";
 
+/**
+ * Reveals on mount, deliberately NOT on scroll.
+ *
+ * A `whileInView` reveal starts the section at opacity 0 and waits for an
+ * IntersectionObserver to undo it. That is a reveal that can fail closed: this
+ * gallery's images carry no intrinsic size, so the section had almost no area,
+ * the observer never fired, and the whole block stayed invisible on the live
+ * site. A proposal page is the last place to accept "usually visible" — the
+ * animation is a flourish, so it is not allowed to own whether content renders.
+ */
 const rise = {
   initial: { opacity: 0, y: 14 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-40px" },
+  animate: { opacity: 1, y: 0 },
   transition: { duration: 0.6, ease: [0.2, 0.7, 0.3, 1] as const },
 };
 
@@ -121,18 +130,20 @@ const Chapter = () => {
         </motion.section>
       )}
 
-      {/* Gallery */}
+      {/* Gallery.
+          Grid, not CSS columns, and eagerly loaded on purpose. These images
+          carry no width/height, so before they load their box is zero-high —
+          and a zero-high lazy image inside a multi-column container never
+          trips the load, which left the whole gallery blank. A zero-high
+          section also has no intersection area, so the reveal animation never
+          fired either and the section stayed at opacity 0. Eight webp files is
+          not a payload worth reintroducing that for. */}
       {chapter.galleryImages && chapter.galleryImages.length > 0 && (
         <motion.section className="container-custom py-10 md:py-14" {...rise}>
-          <div className="columns-1 gap-6 md:columns-2 [&>*]:mb-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {chapter.galleryImages.map((src) => (
               <div key={src} className="media-frame bg-plum-2">
-                <img
-                  src={src}
-                  alt=""
-                  loading="lazy"
-                  className="w-full object-cover"
-                />
+                <img src={src} alt="" className="block w-full" />
               </div>
             ))}
           </div>
