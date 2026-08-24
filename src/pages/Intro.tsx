@@ -6,6 +6,7 @@ import SpectrumStrip from "@/components/SpectrumStrip";
 import StageBanner from "@/components/StageBanner";
 import TeaserStrip from "@/components/TeaserStrip";
 import PhaseTracker from "@/components/PhaseTracker";
+import OwnerChapterIndex from "@/components/OwnerChapterIndex";
 import PaymentState from "@/components/PaymentState";
 import SignOff from "@/components/SignOff";
 import ClinkMark from "@/components/ClinkMark";
@@ -117,6 +118,9 @@ const Intro = () => (
         delay={0}
       >
         <PhaseTracker />
+        <div className="mt-6">
+          <OwnerChapterIndex />
+        </div>
       </Section>
 
       <Section

@@ -14,6 +14,7 @@
  */
 import { withBase } from "./utils";
 import { isChapterOpen } from "@/content/project-state";
+import type { Role } from "@/content/access";
 
 const chapterFiles = import.meta.glob("/src/content/chapters/*.md", {
   as: "raw",
@@ -278,4 +279,20 @@ export function isOpen(chapter: ChapterContent): boolean {
 
 export function getOpenChapters(): ChapterContent[] {
   return loadChapters().filter(isOpen);
+}
+
+/**
+ * What a given account may open. Owners see every released chapter whatever
+ * the project state says — they are the ones deciding when a phase is ready,
+ * so they have to be able to read it first. The client sees only what has
+ * actually been handed over.
+ */
+export function isVisibleTo(chapter: ChapterContent, role: Role | null): boolean {
+  if (!chapter.released) return false;
+  if (role === "owner") return true;
+  return isChapterOpen(chapter.order);
+}
+
+export function getVisibleChapters(role: Role | null): ChapterContent[] {
+  return loadChapters().filter((c) => isVisibleTo(c, role));
 }

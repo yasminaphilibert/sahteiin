@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import type { ChapterContent } from "@/lib/chapters";
-import { getOpenChapters, loadChapters } from "@/lib/chapters";
+import { getVisibleChapters, loadChapters } from "@/lib/chapters";
+import { useSession } from "@/lib/session-context";
 import { isChapterOpen } from "@/content/project-state";
 
 /**
@@ -9,15 +10,18 @@ import { isChapterOpen } from "@/content/project-state";
  * share link is the only door.
  */
 const ChapterFooterNav = ({ current }: { current: ChapterContent }) => {
-  const released = getOpenChapters();
+  const { role } = useSession();
+  const released = getVisibleChapters(role);
   const idx = released.findIndex((c) => c.slug === current.slug);
   const prev = idx > 0 ? released[idx - 1] : null;
   const next = idx >= 0 && idx < released.length - 1 ? released[idx + 1] : null;
   // The "revealed at sign-off" teaser only makes sense while an unreleased
   // chapter actually sits between here and the end of the book.
-  const hasLockedAhead = loadChapters().some(
-    (c) => !isChapterOpen(c.order) && c.order > current.order
-  );
+  const hasLockedAhead =
+    role !== "owner" &&
+    loadChapters().some(
+      (c) => !isChapterOpen(c.order) && c.order > current.order
+    );
 
   return (
     <nav className="grid gap-4 sm:grid-cols-2">
