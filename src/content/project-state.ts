@@ -54,9 +54,13 @@ export const PROJECT = {
     name: "Yasmina Philibert",
     role: "Brand & packaging design",
     location: "Beirut, Lebanon",
+    // Published deliberately: a quote the client cannot reply to is not a
+    // quote. This is the address acceptance comes back to.
+    email: "yasminaphilibert@gmail.com",
   },
   client: {
     name: "ElectroNytes",
+    attn: "Tino Karam",
     project: "Rebrand — naming, identity, packaging, launch",
     location: "Beirut, Lebanon",
   },

@@ -70,10 +70,17 @@ const Devis = () => (
             <p className="text-[15px] font-semibold text-bone">{PROJECT.from.name}</p>
             <p className="text-[14px] text-bone-2">{PROJECT.from.role}</p>
             <p className="text-[14px] text-bone-2">{PROJECT.from.location}</p>
+            <a
+              href={`mailto:${PROJECT.from.email}`}
+              className="mt-1 inline-block text-[14px] text-amber underline decoration-amber/40 underline-offset-4"
+            >
+              {PROJECT.from.email}
+            </a>
           </div>
           <div className="card-surface p-5">
             <p className="label mb-2">For</p>
             <p className="text-[15px] font-semibold text-bone">{PROJECT.client.name}</p>
+            <p className="text-[14px] text-bone-2">Attn: {PROJECT.client.attn}</p>
             <p className="text-[14px] text-bone-2">{PROJECT.client.project}</p>
             <p className="text-[14px] text-bone-2">{PROJECT.client.location}</p>
           </div>
@@ -203,11 +210,20 @@ const Devis = () => (
           </h2>
           <p className="body-copy mb-8 max-w-[58ch] text-[15px]">
             Accepting this devis means agreeing the scope, the fee and the terms
-            above. A reply by email confirming acceptance is enough to begin —
-            a signature below is welcome if you prefer it on paper. The first
+            above. A reply confirming acceptance is enough to begin — a
+            signature below is welcome if you prefer it on paper. The first
             thing you will see is a one-page brief that proves we are building
             the same thing.
           </p>
+
+          <a
+            href={`mailto:${PROJECT.from.email}?subject=${encodeURIComponent(
+              `Devis ${PROJECT.reference} — accepted`
+            )}`}
+            className="mb-8 inline-flex items-center gap-3 rounded-full bg-amber px-7 py-3.5 font-mono text-[13px] uppercase tracking-[0.18em] text-plum transition-opacity hover:opacity-90"
+          >
+            Accept by email →
+          </a>
 
           <div className="grid gap-8 sm:grid-cols-3">
             {["Name and title", "Signature", "Date"].map((l) => (
