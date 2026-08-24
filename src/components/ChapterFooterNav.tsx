@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import type { ChapterContent } from "@/lib/chapters";
-import { getReleasedChapters, loadChapters } from "@/lib/chapters";
+import { getOpenChapters, loadChapters } from "@/lib/chapters";
+import { isChapterOpen } from "@/content/project-state";
 
 /**
  * Prev/next runs over released chapters only. An unlisted chapter never
@@ -8,14 +9,14 @@ import { getReleasedChapters, loadChapters } from "@/lib/chapters";
  * share link is the only door.
  */
 const ChapterFooterNav = ({ current }: { current: ChapterContent }) => {
-  const released = getReleasedChapters();
+  const released = getOpenChapters();
   const idx = released.findIndex((c) => c.slug === current.slug);
   const prev = idx > 0 ? released[idx - 1] : null;
   const next = idx >= 0 && idx < released.length - 1 ? released[idx + 1] : null;
   // The "revealed at sign-off" teaser only makes sense while an unreleased
   // chapter actually sits between here and the end of the book.
   const hasLockedAhead = loadChapters().some(
-    (c) => !c.released && c.order > current.order
+    (c) => !isChapterOpen(c.order) && c.order > current.order
   );
 
   return (

@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "@/components/ScrollToTop";
-import Home from "@/pages/Home";
+import Intro from "@/pages/Intro";
+import Devis from "@/pages/Devis";
 import Chapter from "@/pages/Chapter";
 import NotFound from "@/pages/NotFound";
 
@@ -13,7 +14,8 @@ const App = () => (
   <BrowserRouter basename={import.meta.env.BASE_URL}>
     <ScrollToTop />
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<Intro />} />
+      <Route path="/devis" element={<Devis />} />
       <Route path="/c/:slug" element={<Chapter />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

@@ -1,3 +1,5 @@
+import { PROJECT, money } from "@/content/project-state";
+
 /**
  * The two website routes, quoted separately from the core $6,500 — an
  * optional appendix, not a fifth phase. Prices, durations and the platform
@@ -13,7 +15,7 @@ const ROUTES = [
   {
     name: "The brand site",
     tag: "Marketing",
-    price: "$1,600",
+    price: money(PROJECT.addOns[0].fee),
     weeks: "2 weeks",
     blurb: "Tell the story, show the range, help someone find you on a shelf.",
     includes: [
@@ -26,7 +28,7 @@ const ROUTES = [
   {
     name: "The shop",
     tag: "Commercial",
-    price: "$3,000",
+    price: money(PROJECT.addOns[1].fee),
     weeks: "3 weeks",
     blurb: "Sell the seven and the multipack, direct, across Lebanon.",
     includes: [
@@ -45,7 +47,7 @@ const TERMS: Array<[string, string]> = [
     "Not included",
     "Domain, the Shopify subscription, and the merchant account with a local card gateway — all opened in your name. Product photography (covered by Chapter 04's shot list). Ongoing maintenance, available after launch at $300/day.",
   ],
-  ["Timing", "Either route can start now, after week 6, or not at all — the $6,500 proposal stands on its own."],
+  ["Timing", `Either route can start now, after week 6, or not at all — the ${money(PROJECT.total)} proposal stands on its own.`],
 ];
 
 const WebsiteQuotes = () => (

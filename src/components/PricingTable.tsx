@@ -1,3 +1,4 @@
+import { PROJECT, money } from "@/content/project-state";
 /**
  * The commercial page as a spec sheet: one number set large, the conditions as
  * metadata rows. Nothing here is a pitch — the chapters were the pitch.
@@ -32,7 +33,7 @@ const PricingTable = () => (
   <div className="flex flex-col gap-6">
     <div className="card-surface flex flex-wrap items-center justify-between gap-8 border-amber/40 p-7 md:p-9">
       <div>
-        <p className="display-heading text-5xl md:text-6xl">$6,500</p>
+        <p className="display-heading text-5xl md:text-6xl">{money(PROJECT.total)}</p>
         <p className="label mt-3">flat · 50% to start · 50% on delivery</p>
       </div>
       <ul className="flex max-w-[44ch] flex-col gap-2.5">

@@ -1,6 +1,6 @@
 import { useParams, Navigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { getChapterBySlug } from "@/lib/chapters";
+import { getChapterBySlug, isOpen } from "@/lib/chapters";
 import CompareSlider from "@/components/CompareSlider";
 import MetaBlock from "@/components/MetaBlock";
 import RoadmapTimeline from "@/components/RoadmapTimeline";
@@ -10,6 +10,8 @@ import ChapterFooterNav from "@/components/ChapterFooterNav";
 import SpectrumStrip from "@/components/SpectrumStrip";
 import SignOff from "@/components/SignOff";
 import ClinkMark from "@/components/ClinkMark";
+import LockedNotice from "@/components/LockedNotice";
+import StageBanner from "@/components/StageBanner";
 
 /**
  * Scroll reveal, with the threshold kept deliberately low.
@@ -38,10 +40,23 @@ const Chapter = () => {
   const chapter = slug ? getChapterBySlug(slug) : undefined;
   if (!chapter) return <Navigate to="/404" replace />;
 
+  // A chapter whose phase has not been delivered yet is a real page the client
+  // was probably sent a link to — so say what is in it and what opens it,
+  // rather than pretending it does not exist.
+  if (!isOpen(chapter)) {
+    return (
+      <>
+        <StageBanner />
+        <LockedNotice chapter={chapter} />
+      </>
+    );
+  }
+
   const [intro, ...proseGroups] = chapter.description;
 
   return (
     <div className="pb-16">
+      <StageBanner />
       {/* Hero.
           The box takes the image's aspect (all heroes are encoded 2280x1536,
           3:2) instead of a fixed viewport height with object-cover — the crop

@@ -13,6 +13,7 @@
  * within those shapes.
  */
 import { withBase } from "./utils";
+import { isChapterOpen } from "@/content/project-state";
 
 const chapterFiles = import.meta.glob("/src/content/chapters/*.md", {
   as: "raw",
@@ -263,4 +264,18 @@ export function getChapterBySlug(slug: string): ChapterContent | undefined {
  *  reachable by its link but never advertised by its neighbours. */
 export function getReleasedChapters(): ChapterContent[] {
   return loadChapters().filter((c) => c.released);
+}
+
+/**
+ * Two gates, and both must pass. `released` is the hard switch in the
+ * chapter's own frontmatter — a chapter can be withheld regardless of how the
+ * project is going. `openChapters` in project-state is the soft one that the
+ * engagement moves: a phase is delivered, its chapter opens.
+ */
+export function isOpen(chapter: ChapterContent): boolean {
+  return chapter.released && isChapterOpen(chapter.order);
+}
+
+export function getOpenChapters(): ChapterContent[] {
+  return loadChapters().filter(isOpen);
 }
