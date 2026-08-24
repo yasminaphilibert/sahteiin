@@ -11,6 +11,8 @@ import SpectrumStrip from "@/components/SpectrumStrip";
 import SignOff from "@/components/SignOff";
 import ClinkMark from "@/components/ClinkMark";
 import LockedNotice from "@/components/LockedNotice";
+import { useSession } from "@/lib/session-context";
+import { canSeeLockedChapters } from "@/content/access";
 import StageBanner from "@/components/StageBanner";
 
 /**
@@ -37,13 +39,16 @@ const rise = {
  */
 const Chapter = () => {
   const { slug } = useParams();
+  const { role } = useSession();
   const chapter = slug ? getChapterBySlug(slug) : undefined;
   if (!chapter) return <Navigate to="/404" replace />;
 
   // A chapter whose phase has not been delivered yet is a real page the client
   // was probably sent a link to — so say what is in it and what opens it,
   // rather than pretending it does not exist.
-  if (!isOpen(chapter)) {
+  // Owners walk through locked chapters freely — Yasmina has to be able to
+  // read a phase before deciding it is ready to hand over.
+  if (!isOpen(chapter) && !canSeeLockedChapters(role)) {
     return (
       <>
         <StageBanner />

@@ -1,4 +1,5 @@
 import { PROJECT, stageCopy, type Stage } from "@/content/project-state";
+import { useSession } from "@/lib/session-context";
 
 const STAGES: Stage[] = ["proposal-sent", "accepted", "in-progress", "delivered"];
 
@@ -11,6 +12,7 @@ const STAGES: Stage[] = ["proposal-sent", "accepted", "in-progress", "delivered"
  */
 const StageBanner = () => {
   const { label, line } = stageCopy();
+  const { session, signOut } = useSession();
   const idx = STAGES.indexOf(PROJECT.stage);
 
   return (
@@ -35,9 +37,24 @@ const StageBanner = () => {
             />
           ))}
         </div>
-        <span className="label">
-          Ref {PROJECT.reference}
-        </span>
+        <span className="label">Ref {PROJECT.reference}</span>
+        {session && (
+          <span className="flex items-center gap-3">
+            <span className="label">
+              {session.label}
+              {session.role === "owner" && (
+                <span className="ml-2 text-amber">· owner view</span>
+              )}
+            </span>
+            <button
+              type="button"
+              onClick={signOut}
+              className="label underline decoration-white/25 underline-offset-4 transition-colors hover:text-bone-2"
+            >
+              Sign out
+            </button>
+          </span>
+        )}
       </div>
     </div>
   );
