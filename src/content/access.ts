@@ -44,17 +44,19 @@ export const ACCOUNTS: Account[] = [
     role: "owner",
     label: "Yasmina",
   },
-  // ── CLIENT ────────────────────────────────────────────────────────────────
-  // Add the client's address here before sending the link. Generate with:
+  {
+    // tino@tinokaram.com — the client. Sees the intro, the devis, and each
+    // chapter only once its phase is opened in project-state.openChapters.
+    hash: "465474a00dc23ea904ce960b4e2ff2f6091d3ea9740fce5fb5613342449e9d44",
+    role: "client",
+    label: "Tino",
+  },
+  // To add another address: generate the hash with
   //   node -e "console.log(require('crypto').createHash('sha256')
   //     .update('THEIR@EMAIL.COM'.trim().toLowerCase()).digest('hex'))"
-  // Until this is filled in the client cannot sign in at all.
-  //
-  // {
-  //   hash: "…",
-  //   role: "client",
-  //   label: "ElectroNytes",
-  // },
+  // and add an entry above. Deleting an entry revokes access immediately —
+  // currentSession() re-checks this list on every read, so a stored session
+  // dies with its account rather than outliving it.
 ];
 
 /**
